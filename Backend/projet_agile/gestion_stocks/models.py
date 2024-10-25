@@ -61,29 +61,3 @@ class Sale(models.Model):
             super().save(*args, **kwargs)
         else:
             raise ValueError("Quantité en stock insuffisante.")
- 
-
-# views.py
-from rest_framework import generics
-from .models import Product, Category, Stock, Sale
-from .serializers import ProductSerializer, CategorySerializer, StockSerializer, SaleSerializer
-
-class ProductList(generics.ListCreateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-
-class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-
-class CategoryList(generics.ListCreateAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-
-class StockList(generics.ListCreateAPIView):
-    queryset = Stock.objects.all()
-    serializer_class = StockSerializer
-
-class SaleList(generics.ListCreateAPIView):
-    queryset = Sale.objects.all()
-    serializer_class = SaleSerializer

@@ -26,6 +26,14 @@ urlpatterns = [
     path('categories/<int:pk>/update/', views.CategoryUpdateView.as_view(), name='category_update'),  # Modifier une catégorie
     path('categories/<int:pk>/delete/', views.CategoryDeleteView.as_view(), name='category_delete'),  # Supprimer une catégorie
 
+    #Route pour les fournisseurs
+    path('suppliers/', views.SupplierListView.as_view(), name='supplier_list'),
+    path('suppliers/add/', views.SupplierCreateView.as_view(), name='supplier_add'),
+    path('suppliers/<int:pk>/edit/', views.SupplierUpdateView.as_view(), name='supplier_edit'),
+    path('suppliers/<int:pk>/', views.SupplierDetailView.as_view(), name='supplier_detail'),
+    path('suppliers/<int:pk>/delete/', views.SupplierDeleteView.as_view(), name='supplier_delete'),
+
+
     # Routes pour les produits
     path('products/', views.ProductListView.as_view(), name='product_list'),  # Liste des produits
     path('products/create/', views.ProductCreateView.as_view(), name='product_create'),  # Créer un produit
@@ -48,4 +56,6 @@ urlpatterns = [
     path('api/categories/', views.CategoryList.as_view(), name='category-list'),
     path('api/stocks/', views.StockList.as_view(), name='stock-list'),
     path('api/sales/', views.SaleList.as_view(), name='sale-list'),
+    path('api/suppliers', views.SupplierList.as_view(), name='supplier-list'),
+    path('api/suppliers/<int:pk>/', views.SupplierDetail.as_view(), name='supplier-detail'),
 ]

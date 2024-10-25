@@ -1,14 +1,15 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView, DetailView
 from django.urls import reverse_lazy
 from .models import Category
 from .models import Sale
 from .models import Stock
 from .models import Product
+from .models import Supplier
 from rest_framework import generics 
-from .serializers import ProductSerializer, CategorySerializer, StockSerializer, SaleSerializer
+from .serializers import ProductSerializer, CategorySerializer, StockSerializer, SaleSerializer, SupplierSerializer
 
 
 class Index(TemplateView):
@@ -39,6 +40,35 @@ class CategoryDeleteView(DeleteView):
     model = Category
     template_name = 'gestion_stocks/Categories/category_confirm_delete.html'
     success_url = reverse_lazy('category_list')
+
+
+##################################### Section des fournisseurs ############################
+class SupplierListView(ListView):
+    model = Supplier
+    template_name = 'gestion_stocks/Suppliers/supplier_list.html'
+    context_object_name = 'suppliers'
+
+class SupplierDetailView(DetailView):
+    model = Supplier
+    template_name = 'gestion_stocks/Suppliers/supplier_detail.html'
+    context_object_name = 'suppliers'
+
+class SupplierCreateView(CreateView):
+    model = Supplier
+    template_name = 'gestion_stocks/Suppliers/supplier_form.html'
+    fields = ['name', 'contact_name', 'phone_number', 'email', 'address']
+    success_url = reverse_lazy('supplier_list')
+
+class SupplierUpdateView(UpdateView):
+    model = Supplier
+    template_name = 'gestion_stocks/Suppliers/supplier_form.html'
+    fields = ['name', 'contact_name', 'phone_number', 'email', 'address']
+    success_url = reverse_lazy('supplier_list')
+
+class SupplierDeleteView(DeleteView):
+    model = Supplier
+    template_name = 'gestion_stocks/Suppliers/supplier_confirm_delete.html'
+    success_url = reverse_lazy('supplier_list')
 
 
 ##################################### Section des stocks ##################################
@@ -134,4 +164,11 @@ class StockList(generics.ListCreateAPIView):
 class SaleList(generics.ListCreateAPIView):
     queryset = Sale.objects.all()
     serializer_class = SaleSerializer
- 
+
+class SupplierList(generics.ListCreateAPIView):
+    queryset = Supplier.objects.all()
+    serializer_class = SupplierSerializer
+
+class SupplierDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Supplier.objects.all()
+    serializer_class = SupplierSerializer

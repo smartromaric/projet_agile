@@ -7,7 +7,7 @@
 ###############################################################################################################################
 
 from rest_framework import serializers
-from .models import Product, Category, Stock, Sale 
+from .models import Product, Category, Stock, Sale, Supplier
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,4 +27,9 @@ class StockSerializer(serializers.ModelSerializer):
 class SaleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sale
+        fields = '__all__'
+
+class SupplierSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Supplier
         fields = '__all__'
