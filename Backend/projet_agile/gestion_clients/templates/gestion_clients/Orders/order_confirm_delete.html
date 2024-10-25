@@ -1,0 +1,16 @@
+<!-- templates/gestion_clients/order_confirm_delete.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Supprimer Commande</title>
+</head>
+<body>
+    <h1>Supprimer la Commande {{ order.id }}</h1>
+    <p>Voulez-vous vraiment supprimer cette commande pour {{ order.client }} ?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Oui, supprimer</button>
+        <a href="{% url 'order_list' %}">Annuler</a>
+    </form>
+</body>
+</html>

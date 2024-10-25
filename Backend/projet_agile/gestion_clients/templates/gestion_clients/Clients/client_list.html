@@ -1,0 +1,20 @@
+<!-- templates/gestion_clients/client_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Liste des Clients</title>
+</head>
+<body>
+    <h1>Liste des Clients</h1>
+    <a href="{% url 'client_create' %}">Ajouter un Client</a>
+    <ul>
+        {% for client in clients %}
+            <li>
+                {{ client.first_name }} {{ client.last_name }}
+                <a href="{% url 'client_update' client.id %}">Modifier</a>
+                <a href="{% url 'client_delete' client.id %}">Supprimer</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

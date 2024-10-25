@@ -1,0 +1,19 @@
+<!-- templates/gestion_clients/order_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Liste des Commandes</title>
+</head>
+<body>
+    <h1>Liste des Commandes</h1>
+    <ul>
+        {% for order in orders %}
+            <li>
+                Commande {{ order.id }} - {{ order.client }} - Total : {{ order.total_price }} EUR
+                <a href="{% url 'order_detail' order.id %}">Détails</a>
+                <a href="{% url 'order_delete' order.id %}">Supprimer</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

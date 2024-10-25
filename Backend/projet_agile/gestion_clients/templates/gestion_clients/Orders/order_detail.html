@@ -1,0 +1,19 @@
+<!-- templates/gestion_clients/order_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Détails de la Commande</title>
+</head>
+<body>
+    <h1>Détails de la Commande {{ order.id }}</h1>
+    <p>Client : {{ order.client }}</p>
+    <p>Date de la commande : {{ order.order_date }}</p>
+    <p>Total : {{ order.total_price }} EUR</p>
+    <h2>Articles</h2>
+    <ul>
+        {% for item in order.items.all %}
+            <li>{{ item.quantity }} x {{ item.product.name }} - {{ item.price }} EUR</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

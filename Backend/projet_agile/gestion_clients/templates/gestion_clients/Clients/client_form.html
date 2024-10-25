@@ -1,0 +1,15 @@
+<!-- templates/gestion_clients/client_form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Client Form</title>
+</head>
+<body>
+    <h1>{% if form.instance.pk %}Modifier le Client{% else %}Ajouter un Client{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enregistrer</button>
+    </form>
+</body>
+</html>

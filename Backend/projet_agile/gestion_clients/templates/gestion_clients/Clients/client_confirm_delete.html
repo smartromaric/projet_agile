@@ -1,0 +1,16 @@
+<!-- templates/gestion_clients/client_confirm_delete.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Supprimer Client</title>
+</head>
+<body>
+    <h1>Supprimer le Client</h1>
+    <p>Êtes-vous sûr de vouloir supprimer le client {{ client.first_name }} {{ client.last_name }} ?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Oui, supprimer</button>
+        <a href="{% url 'client_list' %}">Annuler</a>
+    </form>
+</body>
+</html>
