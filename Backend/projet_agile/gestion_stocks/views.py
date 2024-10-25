@@ -11,7 +11,8 @@ from .models import Supplier
 from rest_framework import generics 
 from .serializers import ProductSerializer, CategorySerializer, StockSerializer, SaleSerializer, SupplierSerializer
 from rest_framework import permissions
-
+from .forms import StockForm
+from django.contrib import messages
 
 class Index(TemplateView):
     template_name = 'index.html'
@@ -90,6 +91,26 @@ class StockUpdateView(UpdateView):
     template_name = 'gestion_stocks/Stocks/stock_form.html'
     success_url = reverse_lazy('stock_list')
 
+class StockCreateView(CreateView):
+    model = Stock
+    fields = ['product', 'quantity', 'last_restock_date']
+    template_name = 'gestion_stocks/Stocks/add_stock.html'
+    success_url = reverse_lazy('stock_list')
+    form = StockForm
+    
+# def add_stock(request):
+#     if request.method == 'POST':
+#         form = StockForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, "Stock ajouté avec succès.")
+#             return render(request, "gestion_stocks/Stocks/stock_list.html")  # Redirection vers la même page après l'ajout
+#         else:
+#             messages.error(request, "Erreur lors de l'ajout du stock.")
+#     else:
+#         form = StockForm()
+    
+#     return render(request, 'gestion_stocks/Stocks/add_stock.html', {'form': form})
 
 ################################### Section des produits ####################################
 # Liste des produits

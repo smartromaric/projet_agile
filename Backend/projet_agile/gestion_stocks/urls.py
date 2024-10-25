@@ -44,7 +44,8 @@ urlpatterns = [
     path('stock/', views.StockListView.as_view(), name='stock_list'),  # Liste des stocks
     path('stock/<int:pk>/', views.StockDetailView.as_view(), name='stock_detail'),  # Détails du stock d'un produit
     path('stock/<int:pk>/update/', views.StockUpdateView.as_view(), name='stock_update'),  # Mettre à jour le stock
-
+    path('stock/create', views.StockCreateView.as_view(), name="stock_create"),
+    
     # Routes pour les ventes
     path('sales/', views.SaleListView.as_view(), name='sale_list'),  # Liste des ventes
     path('sales/create/', views.SaleCreateView.as_view(), name='sale_create'),  # Créer une vente
