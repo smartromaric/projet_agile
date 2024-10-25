@@ -1,0 +1,12 @@
+{% extends 'gestion_stocks/base.html' %}
+
+{% block content %}
+<h1>{% if object.pk %}Edit Supplier{% else %}Add Supplier{% endif %}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+<a href="{% url 'supplier_list' %}">Back to list</a>
+
+{% endblock %}
