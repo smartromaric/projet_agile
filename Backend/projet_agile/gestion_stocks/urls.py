@@ -58,4 +58,5 @@ urlpatterns = [
     path('api/sales/', views.SaleList.as_view(), name='sale-list'),
     path('api/suppliers', views.SupplierList.as_view(), name='supplier-list'),
     path('api/suppliers/<int:pk>/', views.SupplierDetail.as_view(), name='supplier-detail'),
+    path('api/sales/list-or-create', views.SaleListCreateView.as_view(), name='sale-list-create'),
 ]

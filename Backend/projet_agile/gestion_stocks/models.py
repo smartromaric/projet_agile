@@ -1,4 +1,5 @@
 from django.db import models 
+from employes.models import Employe
 
 # Modèle pour représenter les catégories d'articles (ex: fruits, boissons, etc.)
 class Category(models.Model):
@@ -47,6 +48,8 @@ class Sale(models.Model):
     quantity_sold = models.PositiveIntegerField()  # Quantité vendue
     sale_date = models.DateTimeField(auto_now_add=True)  # Date de la vente
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    employe = models.ForeignKey(Employe, on_delete=models.CASCADE, related_name="ventes", null=False, blank=True)
+
 
     def __str__(self):
         return f"Vente de {self.quantity_sold} {self.product.name} - {self.sale_date}"

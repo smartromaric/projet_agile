@@ -10,6 +10,7 @@ from .models import Product
 from .models import Supplier
 from rest_framework import generics 
 from .serializers import ProductSerializer, CategorySerializer, StockSerializer, SaleSerializer, SupplierSerializer
+from rest_framework import permissions
 
 
 class Index(TemplateView):
@@ -172,3 +173,15 @@ class SupplierList(generics.ListCreateAPIView):
 class SupplierDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Supplier.objects.all()
     serializer_class = SupplierSerializer
+
+class SalePermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        # Seuls les caissières peuvent ajouter ou voir, pas modifier
+        if view.action in ['create', 'list']:
+            return request.user.groups.filter(name='Caissiere').exists()
+        return False
+
+class SaleListCreateView(generics.ListCreateAPIView):
+    queryset = Sale.objects.all()
+    serializer_class = SaleSerializer
+    permission_classes = [SalePermission]
