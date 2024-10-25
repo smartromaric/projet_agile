@@ -6,6 +6,7 @@ from .models import Client, Order, OrderItem
 from .forms import ClientForm
 from gestion_stocks.models import Product
 from django.forms import modelformset_factory
+from rest_framework import generics 
 
 
 def client_list(request):
@@ -77,7 +78,6 @@ def order_delete(request, order_id):
     return render(request, 'gestion_clients/Orders/order_confirm_delete.html', {'order': order})
 
 
-
 ##############################################################################################
 ##############################################################################################
 #########################                                           ##########################
@@ -105,7 +105,6 @@ class ClientDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Client.objects.all()
     serializer_class = ClientSerializer    
 
-
 class OrderItemViewSet(viewsets.ModelViewSet):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
@@ -125,3 +124,14 @@ class OrderList(generics.ListCreateAPIView):
 class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderItemSerializer    
+
+class OrderItemByOrderView(generics.ListAPIView):
+    serializer_class = OrderItemSerializer
+
+    def get_queryset(self):
+        order_id = self.kwargs['order_id']
+        try:
+            order = Order.objects.get(id=order_id)
+        except Order.DoesNotExist:
+            raise NotFound("Order not found")
+        return OrderItem.objects.filter(order=order)    

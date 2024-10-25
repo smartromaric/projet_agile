@@ -1,7 +1,7 @@
 # gestion_clients/serializers.py
 from rest_framework import serializers
 from .models import Client, Order, OrderItem
-from gestion_stocks.models import Product
+from gestion_stocks.serializers import ProductSerializer
 
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
