@@ -148,9 +148,12 @@ class SaleListView(ListView):
 # Créer une nouvelle vente
 class SaleCreateView(CreateView):
     model = Sale
-    fields = ['product', 'quantity_sold']
+    fields = ['product', 'quantity_sold', 'sale_date', 'total_price', 'employe', 'action']
     template_name = 'gestion_stocks/Sales/sale_form.html'
     success_url = reverse_lazy('sale_list')
+
+    def has_permission(self):
+        return True
 
 # Détail d'une vente
 class SaleDetailView(ListView):

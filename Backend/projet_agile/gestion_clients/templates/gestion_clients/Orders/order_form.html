@@ -1,0 +1,19 @@
+<!-- templates/gestion_clients/order_form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Créer une Commande</title>
+</head>
+<body>
+    <h1>Créer une Commande pour {{ client.first_name }} {{ client.last_name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for product in products %}
+            <label>{{ product.name }} - Prix : {{ product.price }} EUR</label>
+            <input type="number" name="quantity_{{ product.id }}" min="0" placeholder="Quantité">
+            <br>
+        {% endfor %}
+        <button type="submit">Créer Commande</button>
+    </form>
+</body>
+</html>
