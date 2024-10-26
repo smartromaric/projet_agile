@@ -55,8 +55,11 @@ urlpatterns = [
     path('api/products/', views.ProductList.as_view(), name='product-list'),
     path('api/products/<int:pk>/', views.ProductDetail.as_view(), name='product-detail'),
     path('api/categories/', views.CategoryList.as_view(), name='category-list'),
+    path('api/categories/<int: pk>/', views.CategoryDetail.as_view(), name='category-detail'),
     path('api/stocks/', views.StockList.as_view(), name='stock-list'),
+    path('api/stocks/<int: pk>', views.StockDetail.as_view(), name='stock-detail'),
     path('api/suppliers', views.SupplierList.as_view(), name='supplier-list'),
     path('api/suppliers/<int:pk>/', views.SupplierDetail.as_view(), name='supplier-detail'),
     path('api/sales/list-or-create', views.SaleListCreateView.as_view(), name='sale-list-create'),
+    path('api/sales/<int:pk>/', views.SaleDetailView.as_view(), name='sale-detail'),
 ]
