@@ -1,0 +1,16 @@
+{% extends 'gestion_stocks/base.html' %}
+
+{% block content %}
+<h1>Suppliers</h1>
+<a href="{% url 'supplier_add' %}">Add Supplier</a>
+<ul>
+    {% for supplier in suppliers %}
+        <li>
+            <a href="{% url 'supplier_detail' supplier.pk %}">{{ supplier.name }}</a>
+            <a href="{% url 'supplier_edit' supplier.pk %}">Edit</a>
+            <a href="{% url 'supplier_delete' supplier.pk %}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

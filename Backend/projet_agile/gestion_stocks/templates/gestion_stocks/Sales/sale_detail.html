@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Détails de la vente</title>
+</head>
+<body>
+    <h1>Détails de la vente</h1>
+
+    <table border="1">
+        <tr>
+            <th>Produit</th>
+            <td>{{ sale.product.name }}</td>
+        </tr>
+        <tr>
+            <th>Quantité vendue</th>
+            <td>{{ sale.quantity_sold }}</td>
+        </tr>
+        <tr>
+            <th>Prix unitaire</th>
+            <td>{{ sale.product.price }}</td>
+        </tr>
+        <tr>
+            <th>Date de vente</th>
+            <td>{{ sale.sale_date }}</td>
+        </tr>
+        <tr>
+            <th>Total</th>
+            <td>{{ sale.quantity_sold|floatformat:2 }} x {{ sale.product.price|floatformat:2 }} = {{ sale.quantity_sold|floatformat:2|mul:sale.product.price|floatformat:2 }}</td>
+        </tr>
+    </table>
+
+    <a href="{% url 'sale_list' %}">Retour à la liste des ventes</a>
+</body>
+</html>
