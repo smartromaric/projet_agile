@@ -138,7 +138,14 @@ class ProductDeleteView(DeleteView):
     template_name = 'gestion_stocks/Products/product_confirm_delete.html'
     success_url = reverse_lazy('product_list')
 
-
+class ProductList(generics.ListCreateAPIView):
+    serializer_class = ProductSerializer
+    def get_queryset(self):
+        queryset = Product.objects.all()
+        category_id = self.request.query_params.get('category_id')
+        if category_id:
+            queryset = queryset.filter(category_id=category_id)
+        return queryset
 ################################### Section des ventes #######################################
 # Liste des ventes
 class SaleListView(ListView):
@@ -170,9 +177,18 @@ class SaleDetailView(ListView):
 ##############################################################################################  
  
 
+# class ProductList(generics.ListCreateAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
+
 class ProductList(generics.ListCreateAPIView):
-    queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    def get_queryset(self):
+        queryset = Product.objects.all()
+        category_id = self.request.query_params.get('category_id')
+        if category_id:
+            queryset = queryset.filter(category_id=category_id)
+        return queryset    
 
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
@@ -182,13 +198,25 @@ class CategoryList(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer    
+
 class StockList(generics.ListCreateAPIView):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
 
+class StockDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Stock.objects.all()
+    serializer_class = StockSerializer    
+
 class SaleList(generics.ListCreateAPIView):
     queryset = Sale.objects.all()
     serializer_class = SaleSerializer
+
+class SaleDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Sale.objects.all()
+    serializer_class = SaleSerializer    
 
 class SupplierList(generics.ListCreateAPIView):
     queryset = Supplier.objects.all()
@@ -209,3 +237,8 @@ class SaleListCreateView(generics.ListCreateAPIView):
     queryset = Sale.objects.all()
     serializer_class = SaleSerializer
     permission_classes = [SalePermission]
+
+class SaleDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Sale.objects.all()
+    serializer_class = SaleSerializer
+    permission_classes = [SalePermission]    
